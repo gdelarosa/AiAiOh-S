@@ -2,7 +2,7 @@
 //  AiAiOhApp.swift
 //  AiAiOh
 //
-//  Created by Gina on 2/4/26.
+//  Main app entry point for iOS demo collection
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct AiAiOhApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DemoListView()
         }
     }
 }
