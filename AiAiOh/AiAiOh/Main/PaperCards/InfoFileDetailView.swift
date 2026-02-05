@@ -18,12 +18,14 @@ struct InfoFileDetailView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    // Markdown content
-                    Text(parseMarkdown(file.markdownContent))
-                        .font(.system(size: 14, weight: .light, design: .default))
+                VStack(alignment: .leading, spacing: 0) {
+                    // Use SwiftUI's native markdown rendering
+                    Text(.init(file.markdownContent))
+                        .font(.system(size: 15, weight: .light, design: .default))
                         .foregroundStyle(.primary)
+                        .textSelection(.enabled)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(24)
             }
             .background(Color(.systemBackground))
@@ -43,18 +45,7 @@ struct InfoFileDetailView: View {
                 }
             }
         }
-        .presentationDetents([.medium, .large])
+        .presentationDetents([.large])
         .presentationDragIndicator(.visible)
-    }
-    
-    // MARK: - Helper
-    
-    /// Basic markdown parsing for display
-    private func parseMarkdown(_ markdown: String) -> AttributedString {
-        do {
-            return try AttributedString(markdown: markdown)
-        } catch {
-            return AttributedString(markdown)
-        }
     }
 }

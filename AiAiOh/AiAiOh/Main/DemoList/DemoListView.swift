@@ -19,16 +19,17 @@ struct DemoListView: View {
     
     // MARK: - Info Files Data
     
-    /// Array of information files (manually add files here)
+    /// Array of information files
     private let infoFiles: [InfoFile] = [
-         // New Info files here
-         InfoFile(
-             title: "Getting Started",
-             markdownContent: """
-             # Getting Started
-             Welcome to the demo app!
-             """
-         )
+        InfoFile(
+            title: "iOS Keywords",
+            markdownContent: iOSKeywordsMarkdown
+        )
+        // Add more files here:
+        // InfoFile(
+        //     title: "SwiftUI Guide",
+        //     markdownContent: swiftUIGuideMarkdown
+        // )
     ]
     
     // MARK: - Demo Data
