@@ -88,4 +88,4 @@ struct AttributesView: View {
             .padding(.horizontal, 24)
         }
     }
-}
+} 
