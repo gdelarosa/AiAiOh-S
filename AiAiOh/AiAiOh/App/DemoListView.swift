@@ -1,7 +1,7 @@
 //
 //  DemoListView.swift
 //  AiAiOh
-//
+//  2/4/26
 //  Main navigation view listing all available demos
 //
 
@@ -34,6 +34,11 @@ struct DemoListView: View {
             title: "Bubble Wrap",
             description: "Hyper-realistic tap-to-pop bubble wrap with PBR materials",
             destination: AnyView(BubbleWrapDemoView())
+        ),
+        Demo(
+            title: "Ramen Machine",
+            description: "Interactive vending machine",
+            destination: AnyView(RamenMachineView())
         )
         // Add more demos here as they're created
     ]
@@ -47,8 +52,8 @@ struct DemoListView: View {
                     DemoRow(demo: demo)
                 }
             }
-            .navigationTitle("AI-AI-Oh")
-            .navigationBarTitleDisplayMode(.large)
+            //.navigationTitle("A-I-A-I-O")
+            //.navigationBarTitleDisplayMode(.large)
         }
     }
 }

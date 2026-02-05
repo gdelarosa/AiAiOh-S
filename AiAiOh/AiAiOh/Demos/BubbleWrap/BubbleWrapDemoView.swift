@@ -1,7 +1,7 @@
 //
 //  BubbleWrapDemoView.swift
 //  AiAiOh
-//
+//  2/4/26
 //  Interactive bubble wrap demo with hyper-realistic PBR rendering
 //
 
@@ -37,7 +37,5 @@ struct BubbleWrapDemoView: View {
             }
         }
         .ignoresSafeArea()
-        .navigationTitle("Bubble Wrap")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
