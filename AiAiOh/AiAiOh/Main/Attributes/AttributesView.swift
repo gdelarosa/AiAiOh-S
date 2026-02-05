@@ -2,7 +2,7 @@
 //  AttributesView.swift
 //  AiAiOh
 //  2/4/26
-//  A list of thanks for free resources used for these demos 
+//  A list of thanks for free resources used for these demos
 //
 
 import SwiftUI
@@ -42,16 +42,14 @@ struct AttributesView: View {
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
-                VStack(spacing: 0) {
-                    // Top 40% - Info Section
-                    infoSection
-                        .frame(height: geometry.size.height * 0.40)
-                    
-                    // Bottom 60% - Attribution List
-                    attributionListSection
-                        .frame(height: geometry.size.height * 0.60)
-                }
+            VStack(spacing: 0) {
+                // Info Section
+                infoSection
+                    .padding(.top, 20)
+                    .padding(.bottom, 16)
+                
+                // Attribution List
+                attributionListSection
             }
             .background(Color(.systemBackground))
             .navigationBarTitleDisplayMode(.inline)
@@ -71,14 +69,11 @@ struct AttributesView: View {
     // MARK: - Info Section
     
     private var infoSection: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("The following assets were used in this project:")
-                .font(.system(size: 13, weight: .light, design: .default))
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 24)
-        .padding(.top, 30)
+        Text("The following assets were used in this project:")
+            .font(.system(size: 16, weight: .light, design: .default))
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 24)
     }
     
     // MARK: - Attribution List Section
