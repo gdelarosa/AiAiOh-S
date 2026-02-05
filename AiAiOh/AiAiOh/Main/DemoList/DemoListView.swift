@@ -42,7 +42,7 @@ struct DemoListView: View {
         ),
         Demo(
             title: "Thermal Interaction",
-            description: "Touch-responsive thermal visualization with heat effects",
+            description: "Touch-responsive thermal visualization with heat",
             destination: AnyView(ThermalDemoView()),
             date: "020426",
             indexTags: ["MetalKit", "QuartzCore"],
