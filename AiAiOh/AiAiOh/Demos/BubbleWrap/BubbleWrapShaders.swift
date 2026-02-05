@@ -35,8 +35,8 @@ enum BubbleWrapShaders {
         float popProgress;
         float imperfectionSeed;
         float dent;
+        float fadeProgress;
         float pad1;
-        float pad2;
     };
     
     // Noise functions for imperfections
@@ -118,8 +118,12 @@ enum BubbleWrapShaders {
             if (dist > radius * 1.15) continue;
             
             float popProgress = bubble.popProgress;
+            float fadeProgress = bubble.fadeProgress;
             float imperfection = bubble.imperfectionSeed;
             float dentAmount = bubble.dent;
+            
+            // Skip fully faded bubbles
+            if (fadeProgress >= 1.0) continue;
             
             // Effective radius with pop animation
             float effectiveRadius = radius * (1.0 - popProgress * 0.3);
@@ -273,7 +277,7 @@ enum BubbleWrapShaders {
                 finalAlpha = max(finalAlpha, effectAlpha);
             }
             
-            // Popped bubble - flattened disc (more opaque)
+            // Popped bubble - flattened disc that fades out
             if (popProgress >= 1.0 && normalizedDist < 1.1) {
                 // Crumpled flat plastic
                 float crumple = fbm(fragCoord * 0.2 + imperfection * 20.0) * 0.1;
@@ -298,11 +302,15 @@ enum BubbleWrapShaders {
                 float poppedAlpha = 0.5 + crumple * 0.3;
                 poppedAlpha *= smoothstep(1.1, 0.9, normalizedDist);
                 
+                // Apply fade - smooth ease out curve
+                float fadeCurve = 1.0 - fadeProgress * fadeProgress;
+                poppedAlpha *= fadeCurve;
+                
                 finalColor = poppedColor;
                 finalAlpha = poppedAlpha;
             }
             
-            // Seam between bubbles
+            // Seam between bubbles (also fades with popped bubble)
             if (normalizedDist > 0.92 && normalizedDist < 1.15 && popProgress < 1.0) {
                 float seamFactor = smoothstep(0.92, 1.0, normalizedDist);
                 float3 seamColor = float3(0.94, 0.94, 0.95);

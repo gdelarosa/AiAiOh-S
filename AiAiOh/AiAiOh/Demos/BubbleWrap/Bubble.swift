@@ -16,6 +16,7 @@ struct Bubble: Identifiable {
     var radius: Float
     var isPopped: Bool = false
     var popProgress: Float = 0.0 // 0 = unpopped, 1 = fully popped
+    var fadeProgress: Float = 0.0 // 0 = visible, 1 = fully faded
     var popStartTime: Double = 0
     var imperfectionSeed: Float // For micro-surface variations
     var dent: Float // Subtle random dent amount

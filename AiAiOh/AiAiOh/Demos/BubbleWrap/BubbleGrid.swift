@@ -16,6 +16,8 @@ class BubbleGrid {
     var bubbleRadius: Float = 0
     var bubbleSpacing: Float = 0
     private let popDuration: Double = 0.35
+    private let fadeDuration: Double = 1.5
+    private let fadeDelay: Double = 0.3 // Delay after pop completes before fade starts
     
     func initializeGrid(for size: CGSize) {
         // Calculate optimal bubble size for screen
@@ -101,9 +103,20 @@ class BubbleGrid {
         
         for row in 0..<rows {
             for col in 0..<cols {
-                if bubbles[row][col].isPopped && bubbles[row][col].popProgress < 1.0 {
+                if bubbles[row][col].isPopped {
                     let elapsed = currentTime - bubbles[row][col].popStartTime
-                    bubbles[row][col].popProgress = min(1.0, Float(elapsed / popDuration))
+                    
+                    // Update pop progress
+                    if bubbles[row][col].popProgress < 1.0 {
+                        bubbles[row][col].popProgress = min(1.0, Float(elapsed / popDuration))
+                    }
+                    
+                    // Update fade progress (starts after pop completes + delay)
+                    let fadeStartTime = popDuration + fadeDelay
+                    if elapsed > fadeStartTime && bubbles[row][col].fadeProgress < 1.0 {
+                        let fadeElapsed = elapsed - fadeStartTime
+                        bubbles[row][col].fadeProgress = min(1.0, Float(fadeElapsed / fadeDuration))
+                    }
                 }
             }
         }
@@ -120,7 +133,7 @@ class BubbleGrid {
                 data.append(bubble.popProgress)
                 data.append(bubble.imperfectionSeed)
                 data.append(bubble.dent)
-                data.append(0) // padding
+                data.append(bubble.fadeProgress)
                 data.append(0) // padding
             }
         }
