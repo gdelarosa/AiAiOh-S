@@ -7,77 +7,116 @@
 
 import SwiftUI
 
-// MARK: - Demo Model
-
-/// Represents a single demo in the app
-struct Demo: Identifiable {
-    let id = UUID()
-    let title: String
-    let description: String
-    let destination: AnyView
-}
-
 // MARK: - Demo List View
 
 struct DemoListView: View {
+    
+    // MARK: - State
+    
+    @State private var showAttributes = false
     
     // MARK: - Demo Data
     
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "Ramen Machine",
+            description: "3D vending machine",
+            destination: AnyView(RamenMachineView()),
+            date: "020426"
+        ),
+        Demo(
             title: "Thermal Interaction",
-            description: "Touch-responsive thermal visualization with beautiful heat effects",
-            destination: AnyView(ThermalDemoView())
+            description: "Touch-responsive thermal visualization with heat effects",
+            destination: AnyView(ThermalDemoView()),
+            date: "020426"
         ),
         Demo(
             title: "Bubble Wrap",
-            description: "Hyper-realistic tap-to-pop bubble wrap with PBR materials",
-            destination: AnyView(BubbleWrapDemoView())
-        ),
-        Demo(
-            title: "Ramen Machine",
-            description: "Interactive vending machine",
-            destination: AnyView(RamenMachineView())
+            description: "Tap-to-pop bubble wrap with PBR materials",
+            destination: AnyView(BubbleWrapDemoView()),
+            date: "020426"
         )
-        // Add more demos here as they're created
     ]
     
     // MARK: - Body
     
     var body: some View {
         NavigationStack {
-            List(demos) { demo in
-                NavigationLink(destination: demo.destination) {
-                    DemoRow(demo: demo)
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    // Top 40% - Info Section
+                    infoSection
+                        .frame(height: geometry.size.height * 0.40)
+                    
+                    // Bottom 60% - Demo List
+                    demoListSection
+                        .frame(height: geometry.size.height * 0.60)
                 }
             }
-            //.navigationTitle("A-I-A-I-O")
-            //.navigationBarTitleDisplayMode(.large)
-        }
-    }
-}
-
-// MARK: - Demo Row
-
-/// Individual row displaying demo information
-struct DemoRow: View {
-    let demo: Demo
-    
-    var body: some View {
-        HStack(spacing: 16) {
-            // Text content
-            VStack(alignment: .leading, spacing: 4) {
-                Text(demo.title)
-                    .font(.headline)
-                    .foregroundColor(.primary)
-                
-                Text(demo.description)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(2)
+            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showAttributes) {
+                AttributesView()
             }
         }
-        .padding(.vertical, 8)
+    }
+    
+    // MARK: - Info Section
+    
+    private var infoSection: some View {
+        HStack(alignment: .top, spacing: 40) {
+            // Left Column
+            VStack(alignment: .leading, spacing: 20) {
+                Text("created by gina dlr")
+                    .font(.system(size: 13, weight: .light, design: .default))
+                    .foregroundColor(.secondary)
+                
+                Button(action: {
+                    showAttributes = true
+                }) {
+                    Text("attributes")
+                        .font(.system(size: 13, weight: .light, design: .default))
+                        .foregroundColor(.secondary)
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("index")
+                        .font(.system(size: 13, weight: .light, design: .default))
+                        .foregroundColor(.secondary)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(demos.indices, id: \.self) { index in
+                                Text("\(String(format: "%02d", index + 1))")
+                                    .font(.system(size: 11, weight: .light, design: .monospaced))
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                }
+            }
+            .padding(.leading, 24)
+            
+            Spacer()
+        }
+        .padding(.top, 40)
+    }
+    
+    // MARK: - Demo List Section
+    
+    private var demoListSection: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                ForEach(demos) { demo in
+                    NavigationLink(destination: demo.destination) {
+                        DemoRow(demo: demo)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 24)
+        }
     }
 }
+
+

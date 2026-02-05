@@ -22,7 +22,7 @@ struct RamenMenuView: View {
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
         }
-        .background(Color.white)
+       // .background(Color.white)
     }
 }
 
@@ -50,13 +50,13 @@ struct RamenMenuItemRow: View {
                 Text(showEnglish ? item.nameEN : item.nameJP)
                     .font(.system(size: 11, weight: .light, design: .default))
                     .kerning(1.5)
-                    .foregroundColor(.black.opacity(0.8))
+                    .foregroundColor(Color.secondary)
                     .overlay(
                         // Anime flash effect
                         Text(showEnglish ? item.nameEN : item.nameJP)
                             .font(.system(size: 11, weight: .light, design: .default))
                             .kerning(1.5)
-                            .foregroundColor(.white)
+                            .foregroundColor(.secondary)
                             .opacity(flashOpacity)
                             .blendMode(.plusLighter)
                     )
@@ -76,18 +76,18 @@ struct RamenMenuItemRow: View {
                 Text(item.priceUSD)
                     .font(.system(size: 11, weight: .ultraLight, design: .monospaced))
                     .kerning(1)
-                    .foregroundColor(.black.opacity(0.6))
+                    .foregroundColor(.secondary)
                 
                 // Spacer between prices
                 Text("  /  ")
                     .font(.system(size: 11, weight: .ultraLight))
-                    .foregroundColor(.black.opacity(0.3))
+                    .foregroundColor(.secondary)
                 
                 // Price in JPY
                 Text(item.priceJPY)
                     .font(.system(size: 11, weight: .ultraLight, design: .monospaced))
                     .kerning(1)
-                    .foregroundColor(.black.opacity(0.6))
+                    .foregroundColor(.secondary)
             }
             .padding(.vertical, 6)
             .padding(.horizontal, 8)

@@ -51,10 +51,10 @@ struct SceneKitView: UIViewRepresentable {
             scene.rootNode.addChildNode(modelNode)
         }
         
-        // Camera - positioned closer for better view
+        // Camera
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 2.5)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 2.0)
         scene.rootNode.addChildNode(cameraNode)
         
         // Lighting

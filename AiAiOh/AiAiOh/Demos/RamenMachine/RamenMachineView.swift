@@ -72,7 +72,7 @@ struct RamenMachineView: View {
             .padding(.top, -20)
         }
         .ignoresSafeArea(.keyboard)
-        .background(Color.white)
+        //.background(Color.white)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.light, for: .navigationBar)
         .toolbar {
