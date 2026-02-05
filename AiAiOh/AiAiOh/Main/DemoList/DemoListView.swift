@@ -25,11 +25,7 @@ struct DemoListView: View {
             title: "iOS Keywords",
             markdownContent: iOSKeywordsMarkdown
         )
-        // Add more files here:
-        // InfoFile(
-        //     title: "SwiftUI Guide",
-        //     markdownContent: swiftUIGuideMarkdown
-        // )
+        // Add more files here
     ]
     
     // MARK: - Demo Data
@@ -41,7 +37,7 @@ struct DemoListView: View {
             description: "3D vending machine",
             destination: AnyView(RamenMachineView()),
             date: "020426",
-            indexTags: ["3D", "Metal", "tap"],
+            indexTags: ["SceneKit"],
             quarter: "q1-w26"
         ),
         Demo(
@@ -49,7 +45,7 @@ struct DemoListView: View {
             description: "Touch-responsive thermal visualization with heat effects",
             destination: AnyView(ThermalDemoView()),
             date: "020426",
-            indexTags: ["Metal", "tap", "drag", "gesture"],
+            indexTags: ["MetalKit", "QuartzCore"],
             quarter: "q1-w26"
         ),
         Demo(
@@ -57,7 +53,7 @@ struct DemoListView: View {
             description: "Play Old MacDonald with interactive piano keys",
             destination: AnyView(PianoDemoView()),
             date: "020426",
-            indexTags: ["tap", "audio", "music", "interactive"],
+            indexTags: ["AVFoundation"],
             quarter: "q1-w26"
         ),
         Demo(
@@ -65,7 +61,7 @@ struct DemoListView: View {
             description: "Tap-to-pop bubble wrap with PBR materials",
             destination: AnyView(BubbleWrapDemoView()),
             date: "020426",
-            indexTags: ["3D", "Metal", "tap"],
+            indexTags: ["MetalKit"],
             quarter: "q1-w26"
         )
     ]
@@ -158,31 +154,25 @@ struct DemoListView: View {
                     
                     VStack(alignment: .trailing, spacing: 4) {
                         HStack(spacing: 8) {
-                            Text("3D")
+                            Text("SceneKit")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                             Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
-                            Text("Metal")
+                            Text("MetalKit")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                         }
                         
                         HStack(spacing: 8) {
-                            Text("tap")
+                            Text("AVFoundation")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                             Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
-                            Text("drag")
-                                .font(.system(size: 10, weight: .light, design: .monospaced))
-                                .foregroundStyle(.secondary)
-                            Text("•")
-                                .font(.system(size: 10, weight: .light))
-                                .foregroundStyle(.secondary.opacity(0.5))
-                            Text("gesture")
+                            Text("QuartzCore")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                         }
