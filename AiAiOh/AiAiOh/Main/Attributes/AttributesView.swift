@@ -1,22 +1,11 @@
 //
 //  AttributesView.swift
 //  AiAiOh
-//
 //  2/4/26
+//  A list of thanks for free resources used for these demos 
 //
 
 import SwiftUI
-
-// MARK: - Attribution Model
-
-struct Attribution: Identifiable {
-    let id = UUID()
-    let title: String
-    let creator: String
-    let url: String
-    let license: String
-    let licenseURL: String?
-}
 
 // MARK: - Attributes View
 
@@ -39,8 +28,14 @@ struct AttributesView: View {
             url: "https://www.pexels.com/photo/orca-swimming-gracefully-underwater-in-ocean-depths-35015132/",
             license: "CC BY 4.0",
             licenseURL: "http://creativecommons.org/licenses/by/4.0/"
+        ),
+        Attribution(
+            title: "Crumpled paper texture",
+            creator: "Vasilisa Designer",
+            url: "https://www.figma.com/community/file/1151038862076532940/crumpled-paper-texture",
+            license: "CC BY 4.0",
+            licenseURL: "http://creativecommons.org/licenses/by/4.0/"
         )
-
     ]
     
     // MARK: - Body
@@ -96,63 +91,6 @@ struct AttributesView: View {
                 }
             }
             .padding(.horizontal, 24)
-        }
-    }
-}
-
-// MARK: - Attribution Row
-
-struct AttributionRow: View {
-    let attribution: Attribution
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 12) {
-                // Title
-                Text(attribution.title)
-                    .font(.system(size: 16, weight: .light, design: .default))
-                    .foregroundStyle(.primary)
-                
-                // Creator
-                Text("by \(attribution.creator)")
-                    .font(.system(size: 11, weight: .light, design: .default))
-                    .foregroundStyle(.secondary)
-                
-                // Asset URL
-                Link(destination: URL(string: attribution.url)!) {
-                    Text(attribution.url)
-                        .font(.system(size: 11, weight: .light, design: .monospaced))
-                        .foregroundStyle(.blue)
-                        .underline()
-                }
-                
-                // License
-                HStack(spacing: 4) {
-                    Text("License:")
-                        .font(.system(size: 11, weight: .light, design: .default))
-                        .foregroundStyle(.secondary)
-                    
-                    if let licenseURL = attribution.licenseURL {
-                        Link(destination: URL(string: licenseURL)!) {
-                            Text(attribution.license)
-                                .font(.system(size: 11, weight: .light, design: .default))
-                                .foregroundStyle(.blue)
-                                .underline()
-                        }
-                    } else {
-                        Text(attribution.license)
-                            .font(.system(size: 11, weight: .light, design: .default))
-                            .foregroundStyle(.secondary)
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 20)
-            
-            // Minimal separator
-            Rectangle()
-                .fill(Color(.separator))
-                .frame(height: 0.5)
         }
     }
 }

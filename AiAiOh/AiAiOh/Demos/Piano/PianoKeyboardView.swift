@@ -121,7 +121,7 @@ struct WhiteKeyView: View {
                 // Highlight for next note
                 if isNextNote {
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.blue, lineWidth: 3)
+                        .stroke(Color.orange, lineWidth: 3)
                 }
                 
                 // Key label

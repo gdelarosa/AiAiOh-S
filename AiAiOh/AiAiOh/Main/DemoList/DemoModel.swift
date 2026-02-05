@@ -15,5 +15,7 @@ struct Demo: Identifiable {
     let title: String
     let description: String
     let destination: AnyView
-    let date: String // Format: "020426"
+    let date: String 
+    let indexTags: [String]
+    let quarter: String
 }

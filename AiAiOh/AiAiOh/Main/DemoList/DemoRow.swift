@@ -30,10 +30,16 @@ struct DemoRow: View {
                 
                 Spacer()
                 
-                // Right side - Date
-                Text(demo.date)
-                    .font(.system(size: 11, weight: .light, design: .monospaced))
-                    .foregroundStyle(.secondary)
+                // Right side - Date and Quarter
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text(demo.date)
+                        .font(.system(size: 11, weight: .light, design: .monospaced))
+                        .foregroundStyle(.secondary)
+                    
+                    Text(demo.quarter)
+                        .font(.system(size: 9, weight: .light, design: .monospaced))
+                        .foregroundStyle(.secondary.opacity(0.6))
+                }
             }
             .padding(.vertical, 20)
             .contentShape(Rectangle())

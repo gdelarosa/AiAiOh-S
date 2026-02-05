@@ -51,7 +51,7 @@ struct PianoSheetMusicView: View {
                 .font(.system(size: 11, weight: .light, design: .default))
                 .foregroundStyle(.secondary)
         }
-        .padding(.top, 20)
+        .padding(.top, 8)
     }
     
     // MARK: - Progress Indicator
@@ -125,7 +125,7 @@ struct NoteCardView: View {
         .frame(width: 44, height: 60)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(isCurrent ? Color.blue : Color.secondary.opacity(0.1))
+                .fill(isCurrent ? Color.orange : Color.secondary.opacity(0.1))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 8)

@@ -14,6 +14,22 @@ struct DemoListView: View {
     // MARK: - State
     
     @State private var showAttributes = false
+    @State private var searchText = ""
+    @State private var selectedInfoFile: InfoFile?
+    
+    // MARK: - Info Files Data
+    
+    /// Array of information files (manually add files here)
+    private let infoFiles: [InfoFile] = [
+         // New Info files here
+         InfoFile(
+             title: "Getting Started",
+             markdownContent: """
+             # Getting Started
+             Welcome to the demo app!
+             """
+         )
+    ]
     
     // MARK: - Demo Data
     
@@ -23,47 +39,81 @@ struct DemoListView: View {
             title: "Ramen Machine",
             description: "3D vending machine",
             destination: AnyView(RamenMachineView()),
-            date: "020426"
+            date: "020426",
+            indexTags: ["3D", "Metal", "tap"],
+            quarter: "q1-w26"
         ),
         Demo(
             title: "Thermal Interaction",
             description: "Touch-responsive thermal visualization with heat effects",
             destination: AnyView(ThermalDemoView()),
-            date: "020426"
+            date: "020426",
+            indexTags: ["Metal", "tap", "drag", "gesture"],
+            quarter: "q1-w26"
         ),
         Demo(
             title: "Piano",
             description: "Play Old MacDonald with interactive piano keys",
             destination: AnyView(PianoDemoView()),
-            date: "020426"
+            date: "020426",
+            indexTags: ["tap", "audio", "music", "interactive"],
+            quarter: "q1-w26"
         ),
         Demo(
             title: "Bubble Wrap",
             description: "Tap-to-pop bubble wrap with PBR materials",
             destination: AnyView(BubbleWrapDemoView()),
-            date: "020426"
+            date: "020426",
+            indexTags: ["3D", "Metal", "tap"],
+            quarter: "q1-w26"
         )
     ]
+    
+    /// Filtered demos based on search text
+    private var filteredDemos: [Demo] {
+        if searchText.isEmpty {
+            return demos
+        } else {
+            return demos.filter { demo in
+                demo.title.localizedCaseInsensitiveContains(searchText) ||
+                demo.description.localizedCaseInsensitiveContains(searchText) ||
+                demo.indexTags.contains { $0.localizedCaseInsensitiveContains(searchText) }
+            }
+        }
+    }
     
     // MARK: - Body
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    // Top 40% - Info Section
-                    infoSection
-                        .frame(height: geometry.size.height * 0.40)
+                    // Search bar
+                    SearchBarView(searchText: $searchText)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 12)
+                        .padding(.bottom, 8)
                     
-                    // Bottom 60% - Demo List
-                    demoListSection
-                        .frame(height: geometry.size.height * 0.60)
+                    // Info Section
+                    infoSection
+                    
+                    // Info Files Row
+                    if !infoFiles.isEmpty {
+                        InfoFilesRow(files: infoFiles, selectedFile: $selectedInfoFile)
+                            .padding(.top, 12)
+                    }
+                    
+                    // Demo List
+                    demoListContent
                 }
             }
             .background(Color(.systemBackground))
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showAttributes) {
                 AttributesView()
+            }
+            .sheet(item: $selectedInfoFile) { file in
+                InfoFileDetailView(file: file)
             }
         }
     }
@@ -78,9 +128,6 @@ struct DemoListView: View {
                     .font(.system(size: 18, weight: .medium, design: .rounded))
                     .foregroundStyle(.primary)
                 Text("iOS demos")
-                    .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .foregroundStyle(.primary)
-                Text("q1-w26")
                     .font(.system(size: 18, weight: .medium, design: .rounded))
                     .foregroundStyle(.primary)
             }
@@ -113,7 +160,7 @@ struct DemoListView: View {
                             Text("3D")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("·")
+                            Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("Metal")
@@ -125,13 +172,13 @@ struct DemoListView: View {
                             Text("tap")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("·")
+                            Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("drag")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("·")
+                            Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("gesture")
@@ -143,22 +190,34 @@ struct DemoListView: View {
             }
             .padding(.trailing, 24)
         }
-        .padding(.top, 40)
+        .padding(.top, 4)
     }
     
-    // MARK: - Demo List Section
+    // MARK: - Demo List Content
     
-    private var demoListSection: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                ForEach(demos) { demo in
-                    NavigationLink(destination: demo.destination) {
-                        DemoRow(demo: demo)
-                    }
-                    .buttonStyle(.plain)
+    private var demoListContent: some View {
+        VStack(spacing: 0) {
+            ForEach(filteredDemos) { demo in
+                NavigationLink(destination: demo.destination) {
+                    DemoRow(demo: demo)
                 }
+                .buttonStyle(.plain)
             }
-            .padding(.horizontal, 24)
+            
+            // Show message when no results
+            if filteredDemos.isEmpty {
+                VStack(spacing: 8) {
+                    Text("No demos found")
+                        .font(.system(size: 14, weight: .light, design: .default))
+                        .foregroundStyle(.secondary)
+                    Text("Try a different search term")
+                        .font(.system(size: 12, weight: .light, design: .default))
+                        .foregroundStyle(.secondary.opacity(0.7))
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.top, 40)
+            }
         }
+        .padding(.horizontal, 24)
     }
 }
