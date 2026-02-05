@@ -54,6 +54,7 @@ struct DemoListView: View {
                         .frame(height: geometry.size.height * 0.60)
                 }
             }
+            .background(Color(.systemBackground))
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showAttributes) {
                 AttributesView()
@@ -64,40 +65,77 @@ struct DemoListView: View {
     // MARK: - Info Section
     
     private var infoSection: some View {
-        HStack(alignment: .top, spacing: 40) {
-            // Left Column
-            VStack(alignment: .leading, spacing: 20) {
+        HStack(alignment: .top, spacing: 0) {
+            // Left Column - Square layout label
+            VStack(alignment: .leading, spacing: 2) {
+                Text("swiftui")
+                    .font(.system(size: 18, weight: .medium, design: .rounded))
+                    .foregroundStyle(.primary)
+                Text("iOS demos")
+                    .font(.system(size: 18, weight: .medium, design: .rounded))
+                    .foregroundStyle(.primary)
+                Text("q1-w26")
+                    .font(.system(size: 18, weight: .medium, design: .rounded))
+                    .foregroundStyle(.primary)
+            }
+            .padding(.leading, 24)
+            
+            Spacer()
+            
+            // Right Column - Metadata
+            VStack(alignment: .trailing, spacing: 20) {
                 Text("created by gina dlr")
                     .font(.system(size: 13, weight: .light, design: .default))
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                 
                 Button(action: {
                     showAttributes = true
                 }) {
                     Text("attributes")
                         .font(.system(size: 13, weight: .light, design: .default))
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
+                .buttonStyle(.plain)
                 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .trailing, spacing: 8) {
                     Text("index")
                         .font(.system(size: 13, weight: .light, design: .default))
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(demos.indices, id: \.self) { index in
-                                Text("\(String(format: "%02d", index + 1))")
-                                    .font(.system(size: 11, weight: .light, design: .monospaced))
-                                    .foregroundColor(.secondary)
-                            }
+                    VStack(alignment: .trailing, spacing: 4) {
+                        HStack(spacing: 8) {
+                            Text("3D")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                            Text("·")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(.secondary.opacity(0.5))
+                            Text("Metal")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        HStack(spacing: 8) {
+                            Text("tap")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                            Text("·")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(.secondary.opacity(0.5))
+                            Text("drag")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                            Text("·")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(.secondary.opacity(0.5))
+                            Text("gesture")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
             }
-            .padding(.leading, 24)
-            
-            Spacer()
+            .padding(.trailing, 24)
         }
         .padding(.top, 40)
     }
@@ -118,5 +156,3 @@ struct DemoListView: View {
         }
     }
 }
-
-

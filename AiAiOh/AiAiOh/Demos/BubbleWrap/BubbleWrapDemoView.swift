@@ -14,7 +14,7 @@ struct BubbleWrapDemoView: View {
         GeometryReader { geometry in
             ZStack {
                 // Background image
-                Image("flowers")
+                Image("orca")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width, height: geometry.size.height)

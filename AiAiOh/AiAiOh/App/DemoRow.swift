@@ -1,7 +1,7 @@
 //
 //  DemoRow.swift
 //  AiAiOh
-//  2/4/2
+//  2/4/26
 //
 
 import SwiftUI
@@ -19,11 +19,11 @@ struct DemoRow: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(demo.title)
                         .font(.system(size: 16, weight: .light, design: .default))
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                     
                     Text(demo.description)
                         .font(.system(size: 11, weight: .light, design: .default))
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
                 }
@@ -33,14 +33,14 @@ struct DemoRow: View {
                 // Right side - Date
                 Text(demo.date)
                     .font(.system(size: 11, weight: .light, design: .monospaced))
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
             .padding(.vertical, 20)
-            .contentShape(Rectangle()) // ← Add this line
+            .contentShape(Rectangle())
             
             // Minimal separator
             Rectangle()
-                .fill(Color.secondary.opacity(0.1))
+                .fill(Color(.separator))
                 .frame(height: 0.5)
         }
     }

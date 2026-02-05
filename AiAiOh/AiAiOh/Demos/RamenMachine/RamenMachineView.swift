@@ -2,7 +2,7 @@
 //  RamenMenuItems.swift
 //  AiAiOh
 //  2/4/26
-//  A 3D ramen machine demo 
+//  A 3D ramen machine demo
 //
 
 import SwiftUI
@@ -32,26 +32,26 @@ struct RamenMachineView: View {
                             Text("Total Cost")
                                 .font(.system(size: 10, weight: .light, design: .default))
                                 .kerning(1.5)
-                                .foregroundStyle(.black.opacity(0.5))
+                                .foregroundStyle(.secondary)
                                 .textCase(.uppercase)
                             
                             VStack(spacing: 4) {
                                 Text(showEnglish ? item.nameEN : item.nameJP)
                                     .font(.system(size: 13, weight: .medium, design: .default))
                                     .kerning(1)
-                                    .foregroundStyle(.black.opacity(0.8))
+                                    .foregroundStyle(.primary)
                                     .multilineTextAlignment(.center)
                                     .lineLimit(2)
                                 
                                 Text(item.priceUSD)
                                     .font(.system(size: 20, weight: .bold, design: .monospaced))
                                     .kerning(0.5)
-                                    .foregroundStyle(.black)
+                                    .foregroundStyle(.primary)
                                 
                                 Text(item.priceJPY)
                                     .font(.system(size: 14, weight: .semibold, design: .monospaced))
                                     .kerning(0.5)
-                                    .foregroundStyle(.black.opacity(0.6))
+                                    .foregroundStyle(.secondary)
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -71,16 +71,15 @@ struct RamenMachineView: View {
             }
             .padding(.top, -20)
         }
+        .background(Color(.systemBackground))
         .ignoresSafeArea(.keyboard)
-        //.background(Color.white)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarColorScheme(.light, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("ラーメン自販機")
                     .font(.system(size: 14, weight: .light, design: .default))
                     .kerning(2)
-                    .foregroundStyle(.black.opacity(0.7))
+                    .foregroundStyle(.secondary)
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -92,9 +91,11 @@ struct RamenMachineView: View {
                     Text(showEnglish ? "日本語" : "English")
                         .font(.system(size: 11, weight: .light, design: .default))
                         .kerning(1.5)
-                        .foregroundStyle(.black.opacity(0.7))
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
             }
         }
     }
