@@ -32,7 +32,15 @@ struct AttributesView: View {
             url: "https://skfb.ly/otUrG",
             license: "CC BY 4.0",
             licenseURL: "http://creativecommons.org/licenses/by/4.0/"
+        ),
+        Attribution(
+            title: "Orca Swimming Gracefully Underwater in Ocean Depths",
+            creator: "Nico Marín",
+            url: "https://www.pexels.com/photo/orca-swimming-gracefully-underwater-in-ocean-depths-35015132/",
+            license: "CC BY 4.0",
+            licenseURL: "http://creativecommons.org/licenses/by/4.0/"
         )
+
     ]
     
     // MARK: - Body
@@ -75,7 +83,7 @@ struct AttributesView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
-        .padding(.top, 40)
+        .padding(.top, 30)
     }
     
     // MARK: - Attribution List Section

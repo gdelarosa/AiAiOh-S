@@ -32,6 +32,12 @@ struct DemoListView: View {
             date: "020426"
         ),
         Demo(
+            title: "Piano",
+            description: "Play Old MacDonald with interactive piano keys",
+            destination: AnyView(PianoDemoView()),
+            date: "020426"
+        ),
+        Demo(
             title: "Bubble Wrap",
             description: "Tap-to-pop bubble wrap with PBR materials",
             destination: AnyView(BubbleWrapDemoView()),

@@ -1,7 +1,6 @@
 //
 //  DemoModel.swift
 //  AiAiOh
-//
 //  2/4/26
 //
 
