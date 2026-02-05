@@ -29,6 +29,11 @@ struct DemoListView: View {
             title: "Thermal Interaction",
             description: "Touch-responsive thermal visualization with beautiful heat effects",
             destination: AnyView(ThermalDemoView())
+        ),
+        Demo(
+            title: "Bubble Wrap",
+            description: "Hyper-realistic tap-to-pop bubble wrap with PBR materials",
+            destination: AnyView(BubbleWrapDemoView())
         )
         // Add more demos here as they're created
     ]
@@ -71,4 +76,3 @@ struct DemoRow: View {
         .padding(.vertical, 8)
     }
 }
-
