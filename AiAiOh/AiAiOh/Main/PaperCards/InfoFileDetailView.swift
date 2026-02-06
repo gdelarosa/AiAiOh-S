@@ -19,7 +19,7 @@ struct InfoFileDetailView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    // Use SwiftUI's native markdown rendering
+
                     Text(.init(file.markdownContent))
                         .font(.system(size: 15, weight: .light, design: .default))
                         .foregroundStyle(.primary)

@@ -1,114 +1,158 @@
-//
-//  iOSKeywords1.swift
-//  AiAiOh
-//  2/5/26
-//  iOS Keywords & Phrases - simplified for native SwiftUI Text rendering
-//
-
 import Foundation
+
 
 let iOSKeywordsMarkdown = """
 **iOS Keywords & Phrases**
 
+A comprehensive reference for modern iOS development vocabulary, patterns, and best practices.
+
+━━━━━━
+
 **1. Core iOS Concepts**
 
 **App Lifecycle**
-App launch, Cold start, Warm start, Scene lifecycle, Foreground, Background, Suspended state, Terminated state, Active state, Inactive state, State restoration
+App launch, Cold start, Warm start, Scene phase, Scene lifecycle, Foreground, Background, Suspended state, Terminated state, Active, Inactive, State restoration, Multi-window support
 
-**App Architecture Terms**
-MVC (Model–View–Controller), MVVM (Model–View–ViewModel), Clean Architecture, Feature-based architecture, Modular architecture, Dependency injection, Single source of truth, Unidirectional data flow, State-driven UI, Reactive architecture, Coordinator pattern, Repository pattern
+**Modern App Architecture**
+MVVM, Clean Architecture, Feature-driven architecture, Modular architecture, Dependency injection, Protocol-oriented design, Composition over inheritance, Single source of truth, Unidirectional data flow, State-driven UI, Reactive architecture, Coordinator pattern, Repository pattern, Domain layer, Interface abstraction
 
-**Apple Frameworks**
-SwiftUI, UIKit, Combine, Core Data, CloudKit, WidgetKit, ActivityKit, StoreKit, Core Animation, Core Graphics, AVFoundation, Vision, MapKit, Core Location, UserNotifications
+**Core Apple Frameworks**
+SwiftUI, UIKit, SwiftData, Foundation Models, AppIntents, WidgetKit, ActivityKit, StoreKit, CloudKit, Core Animation, Core Graphics, AVFoundation, Vision, MapKit, Core Location, UserNotifications, RealityKit, Metal
 
-**2. SwiftUI Vocabulary**
+━━━━━━
+
+**2. Swift Language & Concurrency**
+
+Swift 6, Strict concurrency, Data-race safety, Actor isolation, Sendable, @MainActor, Nonisolated, Structured concurrency, async/await, Task, TaskGroup, Detached task, Cancellation, Cooperative cancellation, AsyncSequence, AsyncStream
+
+**Testing**
+Swift Testing framework, #expect assertions, Test tags, Parallel testing, Snapshot testing
+
+━━━━━━
+
+**3. SwiftUI Vocabulary (Modern)**
 
 **Core Structure**
-View, View hierarchy, Scene, WindowGroup, NavigationStack, NavigationSplitView, TabView, List, ScrollView, LazyVStack, LazyHStack, ZStack, VStack, HStack
+View, Scene, App protocol, WindowGroup, NavigationStack, NavigationSplitView, TabView, List, ScrollView, Grid, LazyVGrid, LazyHGrid, ZStack, VStack, HStack, ViewThatFits, ContentUnavailableView
 
 **State Management**
-@State, @Binding, @StateObject, @ObservedObject, @Environment, @EnvironmentObject, @Published, ObservableObject, Data binding, Two-way binding, View refresh cycle, Source of truth, State mutation, Derived state
+@State, @Binding, @Observable, @ObservationTracking, @Environment, @EnvironmentObject, Observable macro, State mutation, Derived state, Single source of truth, View invalidation, State graph, Data flow
 
-**Layout & Positioning**
-Safe area, SafeAreaInset, GeometryReader, Frame modifier, Alignment, Padding, Spacer, Layout priority, Intrinsic content size, Adaptive layout, Responsive layout, Dynamic type scaling, Size classes, Compact width, Regular width
+**Layout System**
+Layout protocol, Custom layout, Safe area, SafeAreaInset, GeometryReader, ContainerRelativeFrame, Alignment guides, Padding, Spacer, Layout priority, Intrinsic size, Adaptive layout, Responsive layout, Dynamic Type, Size classes
 
-**Navigation**
-Push navigation, Modal presentation, Sheet, Full screen cover, Popover, Deep linking, Programmatic navigation, Navigation destination, Navigation path, Back stack
+**Navigation & Presentation**
+NavigationStack, NavigationPath, navigationDestination, Sheet, FullScreenCover, Popover, Inspector, Programmatic navigation, Deep linking, Universal links, Handoff
 
-**3. UIKit Vocabulary**
+━━━━━━
 
-**Core UIKit**
-UIView, UIViewController, UINavigationController, UITabBarController, UITableView, UICollectionView, UICollectionViewCompositionalLayout, Diffable data source, Reusable cell, Auto Layout, NSLayoutConstraint, Storyboard, XIB, Programmatic UI, First responder, Responder chain
+**4. UIKit (Still Relevant)**
 
-**View Controller Lifecycle**
-viewDidLoad, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear, Layout pass, Rendering cycle
+UIView, UIViewController, UINavigationController, UITabBarController, UITableView, UICollectionView, Diffable data source, Compositional layout, UIHostingController, Auto Layout, NSLayoutConstraint, Programmatic UI, Responder chain
 
-**4. Visual & Interaction Design**
+**Interop**
+SwiftUI–UIKit interoperability, UIViewRepresentable, UIViewControllerRepresentable, Hosting configuration
 
-**Apple Design Language**
-Human Interface Guidelines (HIG), Native feel, Platform conventions, Visual hierarchy, Depth, Blur materials, Vibrancy, San Francisco font, Dynamic type, Accessibility-first design
+━━━━━━
 
-**Common UI Components**
-Button, Label, TextField, TextEditor, Toggle, Slider, Stepper, Picker, Segmented control, Search bar, Toolbar, Context menu, Swipe actions, Floating action button, Card UI, Bottom sheet
+**5. Visual Design & System UI**
 
-**Interaction Patterns**
-Tap gesture, Long press gesture, Drag gesture, Swipe gesture, Pinch gesture, Haptic feedback, Microinteractions, Pull to refresh, Infinite scroll, Skeleton loading, Shimmer loading, Empty state, Error state, Success state
+Human Interface Guidelines (HIG), Liquid Glass design language, Materials, Blur, Vibrancy, Depth, Layered UI, Motion hierarchy, Spatial depth, Native feel, Platform conventions, Dynamic type, Accessibility-first design
 
-**5. Animation & Motion**
+**Common Components**
+Button, Label, TextField, TextEditor, Toggle, Slider, Stepper, Picker, Menu, Toolbar, Searchable, Bottom sheet, Inspector panel, Context menu, Swipe actions, Cards, Empty states
 
-**SwiftUI Animation Terms**
-withAnimation, Implicit animation, Explicit animation, Spring animation, Ease in/out, Linear animation, MatchedGeometryEffect, Transition, Opacity transition, Scale transition, Slide transition, Asymmetric transition
+━━━━━━
 
-**Core Animation**
-CALayer, CABasicAnimation, Keyframe animation, Timing curve, Animation duration, Rendering pipeline, 60 FPS, 120Hz ProMotion, GPU compositing
+**6. Animation & Motion**
 
-**Motion Design Phrases**
-Smooth animation, Fluid motion, Interruptible animation, Physics-based motion, Natural deceleration, Responsive feedback, Tactile feel
+**SwiftUI Animation**
+withAnimation, PhaseAnimator, KeyframeAnimator, Spring animation, Smooth animation, MatchedGeometryEffect, Content transitions, Symbol effects, TimelineView, Transaction, Interruptible animation
 
-**6. Data & Persistence**
+**Performance Motion**
+120Hz ProMotion, Frame pacing, GPU rendering, Core Animation layers, Metal rendering pipeline
 
-**Local Storage**
-UserDefaults, Core Data, SwiftData, FileManager, Keychain, On-device storage, Cache layer, Persistent store, In-memory state
+━━━━━━
+
+**7. Data & Persistence**
+
+**Local Data**
+SwiftData, @Model, ModelContext, Query, PersistentModel, UserDefaults, FileManager, Keychain, On-device storage, Cache layer, In-memory store
 
 **Networking**
-REST API, GraphQL, URLSession, Async/await, JSON decoding, Codable, Pagination, Rate limiting, Retry logic, Offline mode, Sync engine, Background fetch
+URLSession, Async networking, REST API, GraphQL, Codable, Streaming responses, WebSockets, Pagination, Retry logic, Background transfers, Offline mode, Sync engine
 
 **Cloud & Sync**
-CloudKit sync, iCloud storage, Real-time sync, Conflict resolution, Eventual consistency, Local-first architecture
+CloudKit, iCloud sync, Real-time sync, Conflict resolution, Local-first architecture, Eventual consistency
 
-**7. Performance & Optimization**
+━━━━━━
 
-Lazy loading, Memory management, ARC (Automatic Reference Counting), Retain cycle, Weak reference, Main thread, Background thread, Concurrency, Task, TaskGroup, Actor, Debouncing, Throttling, Rendering performance, Launch time optimization, Battery efficiency
+**8. AI & Apple Intelligence**
 
-**8. Accessibility**
+Foundation Models framework, Apple Intelligence, On-device LLM, Prompt sessions, Tool calling, Guided generation, Structured output, Streaming tokens, Context window, Embeddings, Local AI inference, Privacy-first AI
 
-VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, High contrast mode, Accessibility label, Accessibility identifier, Accessibility hint, Focus order, Screen reader support, Tap target size, Color contrast compliance
+**AI App Patterns**
+AI copilots, AI summarization, Smart search, Semantic indexing, AI tagging, Natural language UI, Agent workflows, Intent-driven actions
 
-**9. AI + Modern iOS Feature Language**
+━━━━━━
 
-**AI/LLM Integration**
-On-device model, Foundation Models (Apple), LLM integration, Prompt-driven UI, AI-assisted workflow, Streaming responses, Token usage, Context window, Agent workflow, Tool calling, Structured output
+**9. System Integrations**
 
-**Modern iOS Features**
-Live Activities, Dynamic Island, Interactive widgets, Lock screen widgets, StandBy mode, SharePlay, App Intents, Shortcuts integration, Spotlight indexing, Siri integration
+App Intents, Shortcuts integration, Siri integration, Spotlight indexing, Interactive widgets, Live Activities, Dynamic Island, Lock Screen widgets, StandBy widgets, SharePlay, Universal links, Handoff, Background tasks
 
-**10. Prompt Phrases for LLM iOS Building**
+━━━━━━
+
+**10. Performance & Optimization**
+
+Lazy loading, Memory management, ARC, Retain cycle prevention, Weak references, Instruments profiling, Main thread isolation, Background processing, Task prioritization, Debouncing, Throttling, Rendering performance, Launch time optimization, Battery efficiency
+
+━━━━━━
+
+**11. Accessibility**
+
+VoiceOver, Dynamic Type, Reduce Motion, High contrast, Accessibility label, Accessibility identifier, Focus state, Switch Control, Screen reader support, Color contrast compliance, Hit target sizing
+
+━━━━━━
+
+**12. Spatial & 3D**
+
+RealityKit, visionOS compatibility, 3D transforms, Spatial layout, Immersive space, Volumetric UI, Scene understanding, Metal rendering, ARKit integration
+
+━━━━━━
+
+**13. Prompt Phrases for LLM-Driven iOS Development**
 
 **UI Construction**
-"Create a native iOS SwiftUI interface", "Follow Apple Human Interface Guidelines", "Use state-driven SwiftUI architecture", "Ensure accessibility support", "Use modern iOS design patterns", "Optimize for performance and responsiveness"
+"Create a modern native iOS SwiftUI interface"
+"Use state-driven architecture with SwiftUI Observation"
+"Follow Apple Human Interface Guidelines and Liquid Glass design"
+"Ensure accessibility and performance optimization"
+"Use modern navigation and presentation patterns"
 
 **Architecture**
-"Use MVVM architecture", "Single source of truth", "Unidirectional data flow", "Modular feature-based structure", "Testable and scalable"
+"Use modular MVVM architecture"
+"Maintain single source of truth"
+"Use unidirectional data flow"
+"Ensure scalability and testability"
+
+**AI Integration**
+"Integrate on-device Foundation Models"
+"Use structured AI output and tool calling"
+"Design privacy-first AI experiences"
 
 **Animation**
-"Add subtle, smooth iOS-style animations", "Use spring-based motion", "Ensure 60fps performance", "Use matched geometry transitions"
+"Add smooth, interruptible SwiftUI animations"
+"Use spring-based motion and matched geometry"
+"Maintain 60–120fps performance"
 
 **Interaction**
-"Native iOS gestures", "Haptic feedback where appropriate", "Fluid and responsive UI", "Minimal latency interaction"
+"Use native gestures and system behaviors"
+"Provide subtle haptic feedback"
+"Ensure responsive, low-latency UI"
 
-**11. Example Master Prompt Snippet**
+━━━━━━
 
-*Use this when prompting an LLM:*
+**14. Example Master Prompt**
 
-Build a native iOS SwiftUI interface using MVVM architecture and state-driven UI. Follow Apple Human Interface Guidelines and use modern iOS patterns like NavigationStack, sheets, and smooth spring animations. Ensure accessibility, performance optimization, and clean unidirectional data flow. The interface should feel native, responsive, and production-quality.
+*Build a modern native iOS app using SwiftUI, Swift 6 concurrency, and SwiftData. Follow Apple Human Interface Guidelines and the Liquid Glass design language. Use state-driven architecture with a single source of truth and modular MVVM structure. Integrate App Intents, interactive widgets, and on-device Foundation Models where appropriate. Ensure accessibility, performance optimization, smooth animations, and a responsive production-quality experience.*
 """
