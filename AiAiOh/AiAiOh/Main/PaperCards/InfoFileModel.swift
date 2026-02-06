@@ -14,5 +14,14 @@ import SwiftUI
 struct InfoFile: Identifiable {
     let id = UUID()
     let title: String
-    let markdownContent: String 
+    let markdownContent: String
+    let paperIcon: String
+    
+    /// Initialize with random paper icon selection
+    init(title: String, markdownContent: String) {
+        self.title = title
+        self.markdownContent = markdownContent
+        // Randomly select from paper1, paper2, paper3, paper4
+        self.paperIcon = "paper\(Int.random(in: 1...4))"
+    }
 }

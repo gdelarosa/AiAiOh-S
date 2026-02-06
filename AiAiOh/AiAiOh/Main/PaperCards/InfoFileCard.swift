@@ -17,8 +17,8 @@ struct InfoFileCard: View {
     
     var body: some View {
         Button(action: onTap) {
-            // Paper icon only
-            Image("paper1")
+            // Use the file's randomly assigned paper icon
+            Image(file.paperIcon)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60, height: 80)

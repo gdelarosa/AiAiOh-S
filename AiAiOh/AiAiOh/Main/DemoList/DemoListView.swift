@@ -24,8 +24,11 @@ struct DemoListView: View {
         InfoFile(
             title: "iOS Keywords",
             markdownContent: iOSKeywordsMarkdown
+        ),
+        InfoFile(
+            title: "iOS Poetry",
+            markdownContent: iOSPoetryMarkdown
         )
-        // Add more files here
     ]
     
     // MARK: - Demo Data
