@@ -36,6 +36,14 @@ struct DemoListView: View {
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "8-Page Zine",
+            description: "Interactive paper folding tutorial for mini booklets",
+            destination: AnyView(ZineDemoView()),
+            date: "020626",
+            indexTags: ["Canvas", "SwiftUI"],
+            quarter: "q1-w26"
+        ),
+        Demo(
             title: "Ultra-Rare Card",
             description: "Collectible card with an adventurous feel",
             destination: AnyView(RareCardDemoView()),
@@ -190,6 +198,12 @@ struct DemoListView: View {
                         
                         HStack(spacing: 8) {
                             Text("Canvas")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                            Text("•")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(.secondary.opacity(0.5))
+                            Text("SwiftUI")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                         }
