@@ -18,7 +18,7 @@ struct InfoFilesRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Title label
-            Text("Concept Vault")
+            Text("Notes")
                 .font(.system(size: 13, weight: .regular, design: .default))
                 .foregroundStyle(.secondary)
                 .padding(.leading, 24)

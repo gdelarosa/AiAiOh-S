@@ -33,6 +33,14 @@ struct DemoListView: View {
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "Ultra-Rare Card",
+            description: "Collectible card with an adventurous feel",
+            destination: AnyView(RareCardDemoView()),
+            date: "020626",
+            indexTags: ["QuartzCore", "Canvas"],
+            quarter: "q1-w26"
+        ),
+        Demo(
             title: "Ramen Machine",
             description: "3D vending machine",
             destination: AnyView(RamenMachineView()),
@@ -173,6 +181,12 @@ struct DemoListView: View {
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("QuartzCore")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        HStack(spacing: 8) {
+                            Text("Canvas")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                         }
