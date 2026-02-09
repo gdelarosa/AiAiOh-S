@@ -12,8 +12,6 @@ import SwiftUI
 struct DemoRow: View {
     let demo: Demo
     
-    @State private var isPressed = false
-    
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top) {
@@ -45,23 +43,7 @@ struct DemoRow: View {
             }
             .padding(.vertical, 20)
             .padding(.horizontal, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(.secondarySystemBackground))
-                    .opacity(isPressed ? 1 : 0)
-            )
-            .scaleEffect(isPressed ? 0.98 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isPressed)
             .contentShape(Rectangle())
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        isPressed = true
-                    }
-                    .onEnded { _ in
-                        isPressed = false
-                    }
-            )
             
             // Minimal separator
             Rectangle()

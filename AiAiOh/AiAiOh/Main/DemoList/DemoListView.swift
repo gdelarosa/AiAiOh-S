@@ -38,6 +38,14 @@ struct DemoListView: View {
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "Collage",
+            description: "Drag, rotate, and layer photos into a dynamic collage",
+            destination: AnyView(CollageDemoView()),
+            date: "020926",
+            indexTags: ["PhotosUI", "SwiftUI"],
+            quarter: "q1-w26"
+        ),
+        Demo(
             title: "8-Page Zine",
             description: "Interactive paper folding tutorial for mini booklets",
             destination: AnyView(ZineDemoView()),
@@ -189,7 +197,7 @@ struct DemoListView: View {
                             Text("SceneKit")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("â€¢")
+                            Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("MetalKit")
@@ -201,7 +209,7 @@ struct DemoListView: View {
                             Text("AVFoundation")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("â€¢")
+                            Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("QuartzCore")
@@ -213,10 +221,16 @@ struct DemoListView: View {
                             Text("Canvas")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("â€¢")
+                            Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("SwiftUI")
+                                .font(.system(size: 10, weight: .light, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                        }
+                        
+                        HStack(spacing: 8) {
+                            Text("PhotosUI")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                         }
