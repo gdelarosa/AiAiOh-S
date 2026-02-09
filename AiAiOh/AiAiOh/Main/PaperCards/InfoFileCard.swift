@@ -15,6 +15,8 @@ struct InfoFileCard: View {
     let file: InfoFile
     let onTap: () -> Void
     
+    @State private var isPressed = false
+    
     var body: some View {
         Button(action: onTap) {
             // Use the file's randomly assigned paper icon
@@ -22,7 +24,18 @@ struct InfoFileCard: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60, height: 80)
+                .scaleEffect(isPressed ? 0.92 : 1.0)
+                .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isPressed)
         }
         .buttonStyle(.plain)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in
+                    isPressed = true
+                }
+                .onEnded { _ in
+                    isPressed = false
+                }
+        )
     }
 }

@@ -16,6 +16,8 @@ struct DemoListView: View {
     @State private var showAttributes = false
     @State private var searchText = ""
     @State private var selectedInfoFile: InfoFile?
+    @State private var hasAppeared = false
+    @Namespace private var animation
     
     // MARK: - Info Files Data
     
@@ -109,14 +111,20 @@ struct DemoListView: View {
                         .padding(.horizontal, 24)
                         .padding(.top, 12)
                         .padding(.bottom, 8)
+                        .opacity(hasAppeared ? 1 : 0)
+                        .offset(y: hasAppeared ? 0 : -20)
                     
                     // Info Section
                     infoSection
+                        .opacity(hasAppeared ? 1 : 0)
+                        .offset(y: hasAppeared ? 0 : -15)
                     
                     // Info Files Row
                     if !infoFiles.isEmpty {
                         InfoFilesRow(files: infoFiles, selectedFile: $selectedInfoFile)
                             .padding(.top, 12)
+                            .opacity(hasAppeared ? 1 : 0)
+                            .offset(y: hasAppeared ? 0 : -10)
                     }
                     
                     // Demo List
@@ -130,6 +138,11 @@ struct DemoListView: View {
             }
             .sheet(item: $selectedInfoFile) { file in
                 InfoFileDetailView(file: file)
+            }
+            .onAppear {
+                withAnimation(.smooth(duration: 0.8, extraBounce: 0.0)) {
+                    hasAppeared = true
+                }
             }
         }
     }
@@ -176,7 +189,7 @@ struct DemoListView: View {
                             Text("SceneKit")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("•")
+                            Text("â€¢")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("MetalKit")
@@ -188,7 +201,7 @@ struct DemoListView: View {
                             Text("AVFoundation")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("•")
+                            Text("â€¢")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("QuartzCore")
@@ -200,7 +213,7 @@ struct DemoListView: View {
                             Text("Canvas")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
-                            Text("•")
+                            Text("â€¢")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
                             Text("SwiftUI")
@@ -219,11 +232,18 @@ struct DemoListView: View {
     
     private var demoListContent: some View {
         VStack(spacing: 0) {
-            ForEach(filteredDemos) { demo in
+            ForEach(Array(filteredDemos.enumerated()), id: \.element.id) { index, demo in
                 NavigationLink(destination: demo.destination) {
                     DemoRow(demo: demo)
                 }
                 .buttonStyle(.plain)
+                .opacity(hasAppeared ? 1 : 0)
+                .offset(y: hasAppeared ? 0 : 10)
+                .animation(
+                    .smooth(duration: 0.5, extraBounce: 0.0)
+                        .delay(Double(index) * 0.05),
+                    value: hasAppeared
+                )
             }
             
             // Show message when no results
@@ -238,6 +258,7 @@ struct DemoListView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, 40)
+                .transition(.scale.combined(with: .opacity))
             }
         }
         .padding(.horizontal, 24)
