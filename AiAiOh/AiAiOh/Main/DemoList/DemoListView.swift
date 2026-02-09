@@ -38,6 +38,14 @@ struct DemoListView: View {
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "Text Weight",
+            description: "Calculate the hidden weight of English words",
+            destination: AnyView(TextWeightDemoView()),
+            date: "020926",
+            indexTags: ["SwiftUI", "Canvas"],
+            quarter: "q1-w26"
+        ),
+        Demo(
             title: "Collage",
             description: "Drag, rotate, and layer photos into a dynamic collage",
             destination: AnyView(CollageDemoView()),
