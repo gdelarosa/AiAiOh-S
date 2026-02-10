@@ -38,11 +38,19 @@ struct DemoListView: View {
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "Robotic",
+            description: "Animated robot hand in immersive 3D space",
+            destination: AnyView(RoboticDemoView()),
+            date: "021026",
+            indexTags: ["RealityKit"],
+            quarter: "q1-w26"
+        ),
+        Demo(
             title: "Text Weight",
             description: "Calculate the hidden weight of English words",
             destination: AnyView(TextWeightDemoView()),
             date: "020926",
-            indexTags: ["SwiftUI", "Canvas"],
+            indexTags: ["Canvas"],
             quarter: "q1-w26"
         ),
         Demo(
@@ -50,7 +58,7 @@ struct DemoListView: View {
             description: "Drag, rotate, and layer photos into a dynamic collage",
             destination: AnyView(CollageDemoView()),
             date: "020926",
-            indexTags: ["PhotosUI", "SwiftUI"],
+            indexTags: ["PhotosUI"],
             quarter: "q1-w26"
         ),
         Demo(
@@ -58,7 +66,7 @@ struct DemoListView: View {
             description: "Interactive paper folding tutorial for mini booklets",
             destination: AnyView(ZineDemoView()),
             date: "020626",
-            indexTags: ["Canvas", "SwiftUI"],
+            indexTags: ["Canvas"],
             quarter: "q1-w26"
         ),
         Demo(
@@ -232,7 +240,7 @@ struct DemoListView: View {
                             Text("•")
                                 .font(.system(size: 10, weight: .light))
                                 .foregroundStyle(.secondary.opacity(0.5))
-                            Text("SwiftUI")
+                            Text("RealityKit")
                                 .font(.system(size: 10, weight: .light, design: .monospaced))
                                 .foregroundStyle(.secondary)
                         }
@@ -263,7 +271,7 @@ struct DemoListView: View {
                 .offset(y: hasAppeared ? 0 : 10)
                 .animation(
                     .smooth(duration: 0.5, extraBounce: 0.0)
-                        .delay(Double(index) * 0.05),
+                    .delay(Double(index) * 0.05),
                     value: hasAppeared
                 )
             }

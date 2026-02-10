@@ -35,6 +35,13 @@ struct AttributesView: View {
             url: "https://www.figma.com/community/file/1151038862076532940/crumpled-paper-texture",
             license: "CC BY 4.0",
             licenseURL: "http://creativecommons.org/licenses/by/4.0/"
+        ),
+        Attribution(
+            title: "Robot Hand Dying",
+            creator: "Rukh3D",
+            url: "https://sketchfab.com/3d-models/robot-hand-dying-581f6ed4fd1245f2b4b3e6fd69e6190c",
+            license: "CC BY 4.0",
+            licenseURL: "http://creativecommons.org/licenses/by/4.0/"
         )
     ]
     
@@ -88,4 +95,4 @@ struct AttributesView: View {
             .padding(.horizontal, 24)
         }
     }
-} 
+}
