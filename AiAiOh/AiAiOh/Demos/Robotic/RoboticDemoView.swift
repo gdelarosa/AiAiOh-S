@@ -7,9 +7,8 @@
 
 import SwiftUI
 import RealityKit
-import ARKit
 
-// MARK: - Premium Robotic Demo View
+// MARK: - Robotic Demo View
 
 struct RoboticDemoView: View {
     @State private var hasAppeared = false
@@ -48,24 +47,17 @@ struct RoboticDemoView: View {
 // MARK: - RealityKit View
 
 struct PremiumRobotARView: UIViewRepresentable {
-    
     func makeUIView(context: Context) -> ARView {
-        let arView = ARView(frame: .zero)
+        let arView = ARView(frame: .zero, cameraMode: .nonAR, automaticallyConfigureSession: false)
         arView.environment.background = .color(.clear)
-        arView.automaticallyConfigureSession = false
-        
-        // Non-AR camera mode (clean demo mode)
-        let config = ARWorldTrackingConfiguration()
-        config.planeDetection = []
-        arView.session.run(config)
         
         // Root anchor
         let rootAnchor = AnchorEntity(world: .zero)
         arView.scene.addAnchor(rootAnchor)
         
-        // Add camera
+        // Camera anchor
         let camera = PerspectiveCamera()
-        let cameraAnchor = AnchorEntity(world: [0, 0, 0])
+        let cameraAnchor = AnchorEntity(world: [0,0,0])
         camera.position = [0, 0, 800]
         cameraAnchor.addChild(camera)
         arView.scene.addAnchor(cameraAnchor)
@@ -80,14 +72,13 @@ struct PremiumRobotARView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
-    
+
     // MARK: - Model Loading
-    
     private func loadRobot(into anchor: AnchorEntity) {
         do {
             let robot = try ModelEntity.loadModel(named: "Robot_Hand_Dying")
             
-            // Center model using bounds
+            // Center model
             let bounds = robot.visualBounds(relativeTo: nil)
             let center = bounds.center
             let extents = bounds.extents
@@ -99,31 +90,28 @@ struct PremiumRobotARView: UIViewRepresentable {
             let scaleFactor = desiredSize / maxDimension
             robot.scale = [scaleFactor, scaleFactor, scaleFactor]
             
-            // Move slightly forward
-            robot.position.z -= 3.5
-            
-            // Rotation
+            // Rotate to side view
             robot.transform.rotation = simd_quatf(angle: .pi/2, axis: [0,1,0])
+            
+            // Move farther from camera
+            robot.position.z -= 3.5
             
             anchor.addChild(robot)
             
-            // Add floating shadow plane
+            // Shadow plane
             addShadowPlane(below: robot, anchor: anchor)
             
-            // Start animation
+            // Animation
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 animateRobot(robot)
             }
-            
         } catch {
             print("Failed to load robot: \(error)")
         }
     }
-    
+
     // MARK: - Studio Lighting
-    
     private func addStudioLighting(to anchor: AnchorEntity) {
-        // Key light
         let keyLight = DirectionalLight()
         keyLight.light.intensity = 1800
         keyLight.light.color = .white
@@ -131,7 +119,6 @@ struct PremiumRobotARView: UIViewRepresentable {
         keyLight.look(at: .zero, from: keyLight.position, relativeTo: nil)
         anchor.addChild(keyLight)
         
-        // Fill light
         let fillLight = DirectionalLight()
         fillLight.light.intensity = 600
         fillLight.light.color = .white
@@ -139,7 +126,6 @@ struct PremiumRobotARView: UIViewRepresentable {
         fillLight.look(at: .zero, from: fillLight.position, relativeTo: nil)
         anchor.addChild(fillLight)
         
-        // Rim light
         let rimLight = DirectionalLight()
         rimLight.light.intensity = 900
         rimLight.light.color = .white
@@ -147,36 +133,22 @@ struct PremiumRobotARView: UIViewRepresentable {
         rimLight.look(at: .zero, from: rimLight.position, relativeTo: nil)
         anchor.addChild(rimLight)
     }
-    
+
     // MARK: - Shadow Plane
-    
     private func addShadowPlane(below model: ModelEntity, anchor: AnchorEntity) {
         let planeMesh = MeshResource.generatePlane(width: 2, depth: 2)
         var material = SimpleMaterial()
         material.color = .init(tint: .black.withAlphaComponent(0.15))
         material.roughness = 1.0
-        
         let plane = ModelEntity(mesh: planeMesh, materials: [material])
-        plane.position = [0, -0.35, -1.2]
+        plane.position = [0, -0.35, -3.5]
         anchor.addChild(plane)
     }
-    
+
     // MARK: - Animation
-    
     private func animateRobot(_ entity: ModelEntity) {
-        let rotation = Transform(
-            pitch: 0,
-            yaw: .pi * 2,
-            roll: 0
-        )
-        
-        entity.move(
-            to: rotation,
-            relativeTo: entity.parent,
-            duration: 8.0,
-            timingFunction: .linear
-        )
-        
+        let rotation = Transform(pitch: 0, yaw: .pi * 2, roll: 0)
+        entity.move(to: rotation, relativeTo: entity.parent, duration: 8.0, timingFunction: .linear)
         if let first = entity.availableAnimations.first {
             entity.playAnimation(first.repeat())
         }
