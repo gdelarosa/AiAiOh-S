@@ -42,7 +42,14 @@ struct AttributesView: View {
             url: "https://sketchfab.com/3d-models/robot-hand-dying-581f6ed4fd1245f2b4b3e6fd69e6190c",
             license: "CC BY 4.0",
             licenseURL: "http://creativecommons.org/licenses/by/4.0/"
-        )
+        ),
+        Attribution(
+            title: "Brewing Coffee with Siphon Method",
+            creator: "Mario Spencer",
+            url: "https://www.pexels.com/video/brewing-coffee-with-siphon-method-33701530/",
+            license: "CC BY 4.0",
+            licenseURL: "http://creativecommons.org/licenses/by/4.0/"
+        ),
     ]
     
     // MARK: - Body

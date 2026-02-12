@@ -38,6 +38,14 @@ struct DemoListView: View {
     /// Array of all available demos
     private let demos: [Demo] = [
         Demo(
+            title: "Coffee",
+            description: "Minimal menu design with strong espresso drinks",
+            destination: AnyView(CoffeeDemoView()),
+            date: "021126",
+            indexTags: ["SwiftUI"],
+            quarter: "q1-w26"
+        ),
+        Demo(
             title: "Robotic",
             description: "Animated robot hand in immersive 3D space",
             destination: AnyView(RoboticDemoView()),
